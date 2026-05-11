@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia das Mães</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #ffe1ec, #fff);
+}
+
+/* SPLASH */
+.splash {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff3f7f, #ff8fb1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 9999;
+}
+
+.loader {
+  width: 45px;
+  height: 45px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* APP */
+.app {
+  display: none;
+  min-height: 100vh;
+}
+
+/* 🔥 NAVBAR CORRIGIDA */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+
+  padding: 18px 16px;
+  text-align: center;
+
+  font-weight: 600;
+  font-size: 16px;
+  color: #ff3f7f;
+
+  border-bottom: 1px solid rgba(255, 63, 127, 0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* CONTAINER */
+.container {
+  padding: 18px;
+  text-align: center;
+}
+
+/* TEXTO */
+.texto {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* BOTAO */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #ff3f7f;
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* MENSAGEM */
+.msg {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  background: #fff0f6;
+  border-radius: 12px;
+  border-left: 4px solid #ff3f7f;
+  font-size: 14px;
+}
+
+/* GALERIA */
+.galeria {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* IMAGENS SEM CORTAR */
+.foto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: #777;
+}
+
+/* PETALAS */
+.petal {
+  position: fixed;
+  top: -10px;
+  font-size: 16px;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SPLASH -->
+<div class="splash" id="splash">
+  <h1>💐 Dia das Mães</h1>
+  <p>Carregando...</p>
+  <div class="loader"></div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <div class="header">💐 Homenagem</div>
+
+  <div class="container">
+
+    <div class="texto">
+      Obrigado por todo o cuidado e dedicação ao longo da vida.  
+      Sua presença sempre foi importante.
+    </div>
+
+    <button onclick="document.getElementById('msg').style.display='block'">
+      Ver mensagem
+    </button>
+
+    <div class="msg" id="msg">
+     Mãe, hoje eu só queria te agradecer de um jeito simples e verdadeiro.
+
+Obrigado por todo cuidado, por cada preocupação silenciosa e por estar presente mesmo quando eu não percebia o quanto isso era importante. Nem sempre eu digo, mas eu valorizo muito tudo o que você faz.
+
+Feliz Dia das Mães. Que seu dia seja leve, com paz e um pouco mais de descanso do que o normal — você merece.
+    </div>
+
+    <!-- GALERIA -->
+    <div class="galeria">
+
+      <div class="foto"><img src="foto1.jpg"></div>
+      <div class="foto"><img src="foto2.jpg"></div>
+      <div class="foto"><img src="foto3.jpg"></div>
+      <div class="foto"><img src="foto4.jpg"></div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+<script>
+
+// splash
+setTimeout(() => {
+  document.getElementById("splash").style.opacity = "0";
+  document.getElementById("splash").style.transition = "0.8s";
+
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  }, 800);
+}, 2000);
+
+// pétalas
+function criarPetalas() {
+  const emojis = ["🌸","💮","🌺","🌷"];
+
+  for (let i = 0; i < 15; i++) {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (4 + Math.random() * 4) + "s";
+    petal.style.fontSize = (10 + Math.random() * 18) + "px";
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), 9000);
+  }
+}
+
+setInterval(criarPetalas, 1200);
+criarPetalas();
+
+</script>
+
+</body>
+</html>
